@@ -1,0 +1,32 @@
+{
+  "name": "Backend - Analytics Copilot (Text-to-SQL)",
+  "image": "mcr.microsoft.com/devcontainers/python:3.12",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": { "version": "20" },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "forwardPorts": [8001, 5432],
+  "portsAttributes": {
+    "8001": { "label": "Analytics API", "onAutoForward": "notify" },
+    "5432": { "label": "PostgreSQL (test warehouse)", "onAutoForward": "silent" }
+  },
+  "postCreateCommand": "cd apps/analytics-copilot/api && pip install -r requirements.txt",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.black-formatter",
+        "charliermarsh.ruff",
+        "mtxr.sqltools",
+        "mtxr.sqltools-driver-pg",
+        "ms-toolsai.jupyter"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true
+      }
+    }
+  }
+}
