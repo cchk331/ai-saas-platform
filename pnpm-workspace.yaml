@@ -1,0 +1,13 @@
+# pnpm Workspace Configuration
+# ==============================
+# Rationale: Defines which directories contain workspace packages.
+# pnpm uses this to link local dependencies, hoist shared modules,
+# and enable filtered commands (e.g., pnpm --filter finance-os dev).
+#
+# Structure:
+#   apps/*       - The three product applications
+#   packages/*   - Shared libraries (design system, utilities, config)
+
+packages:
+  - "apps/*"
+  - "packages/*"
