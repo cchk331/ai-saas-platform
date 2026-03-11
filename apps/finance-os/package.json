@@ -1,0 +1,30 @@
+{
+  "name": "finance-os",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Product 1: AI Cash Operations. A financial co-pilot for founder-led businesses. Provides cash runway dashboards, month-end close checklists, and forecasting. Frontend built with Next.js 14 (App Router). Consumes the Finance API on port 8000. UI designed in Stitch, validated on paywallexperiments.com.",
+  "scripts": {
+    "dev": "next dev -p 3000",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "test:unit": "vitest run",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "next": "^14.2.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "design-system": "workspace:*",
+    "recharts": "^2.12.0",
+    "@tanstack/react-query": "^5.50.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "tailwindcss": "^3.4.0",
+    "vitest": "^2.0.0",
+    "@playwright/test": "^1.45.0"
+  }
+}
