@@ -1,0 +1,23 @@
+# Media Buyer API Dependencies
+# Rationale: Powers the ad automation platform connecting to Meta,
+# Google, and TikTok ad APIs for campaign management and optimization.
+#
+# Steps:
+# 1. FastAPI + Uvicorn for the campaign management API
+# 2. facebook-business SDK for Meta Ads API integration
+# 3. google-ads for Google Ads campaign management
+# 4. httpx for TikTok Marketing API calls
+# 5. APScheduler for automated bid/budget optimization jobs
+# 6. python-dotenv for API credentials management
+# 7. Redis client for caching campaign metrics
+
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+facebook-business==19.0.0
+google-ads==24.1.0
+httpx==0.25.2
+APScheduler==3.10.4
+python-dotenv==1.0.0
+redis==5.0.1
+pytest==7.4.3
+pytest-asyncio==0.23.2
