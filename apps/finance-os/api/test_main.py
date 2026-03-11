@@ -25,7 +25,7 @@ class TestHealthEndpoint:
         response = client.get("/api/health")
         data = response.json()
         assert "status" in data
-        assert data["status"] == "healthy"
+        assert data["status"] == "ok"
 
 
 class TestKPIEndpoint:
@@ -56,7 +56,19 @@ class TestRunwayEndpoint:
         response = client.get("/api/runway")
         data = response.json()
         assert "months" in data
-        assert isinstance(data["months"], int)
+        assert isinstance(data["months"], list)
+
+    def test_runway_has_balance(self):
+        response = client.get("/api/runway")
+        data = response.json()
+        assert "balance" in data
+        assert isinstance(data["balance"], list)
+
+    def test_runway_has_projected(self):
+        response = client.get("/api/runway")
+        data = response.json()
+        assert "projected" in data
+        assert isinstance(data["projected"], list)
 
 
 class TestCloseChecklistEndpoint:
@@ -68,3 +80,11 @@ class TestCloseChecklistEndpoint:
         response = client.get("/api/close-checklist")
         data = response.json()
         assert isinstance(data, list)
+
+    def test_checklist_items_have_fields(self):
+        response = client.get("/api/close-checklist")
+        data = response.json()
+        assert len(data) > 0
+        for item in data:
+            assert "task" in item
+            assert "done" in item
