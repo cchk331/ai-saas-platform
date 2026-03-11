@@ -16,3 +16,4 @@ export { KPICard } from './components/KPICard';
 export { Badge } from './components/Badge';
 export { Sidebar } from './components/Sidebar';
 export { cn } from './lib/utils';
+export { StatusBadge } from './StatusBadge';
