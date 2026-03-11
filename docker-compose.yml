@@ -1,0 +1,93 @@
+# Docker Compose - Local Development Stack
+# Rationale: Provides a single command to spin up all infrastructure
+# dependencies (PostgreSQL, Redis) plus all 6 services (3 frontends +
+# 3 APIs) for local development and integration testing.
+#
+# Usage: docker compose up -d
+# Teardown: docker compose down -v
+#
+# Architecture:
+#   PostgreSQL (5432) -> Finance OS, Analytics Copilot databases
+#   Redis (6379)      -> Session cache, Media Buyer metrics cache
+#   Finance OS UI     -> localhost:3000 | API -> localhost:8000
+#   Analytics Copilot -> localhost:3001 | API -> localhost:8001
+#   Media Buyer UI    -> localhost:3002 | API -> localhost:8002
+
+version: "3.9"
+
+services:
+  # --- Infrastructure ---
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: devpassword
+      POSTGRES_DB: ai_saas
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dev -d ai_saas"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # --- Finance OS ---
+  finance-os-api:
+    build:
+      context: ./apps/finance-os/api
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    env_file: ./apps/finance-os/api/.env
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # --- Analytics Copilot ---
+  analytics-copilot-api:
+    build:
+      context: ./apps/analytics-copilot/api
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+    env_file: ./apps/analytics-copilot/api/.env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # --- Media Buyer ---
+  media-buyer-api:
+    build:
+      context: ./apps/media-buyer/api
+      dockerfile: Dockerfile
+    ports:
+      - "8002:8002"
+    env_file: ./apps/media-buyer/api/.env
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
