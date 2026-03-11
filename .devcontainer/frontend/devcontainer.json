@@ -1,0 +1,37 @@
+{
+  "name": "Frontend (All Products)",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:20",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20"
+    }
+  },
+  "forwardPorts": [3000, 3001, 3002, 6006],
+  "portsAttributes": {
+    "3000": { "label": "Finance OS", "onAutoForward": "notify" },
+    "3001": { "label": "Analytics Copilot", "onAutoForward": "notify" },
+    "3002": { "label": "Media Buyer", "onAutoForward": "notify" },
+    "6006": { "label": "Storybook", "onAutoForward": "notify" }
+  },
+  "postCreateCommand": "npm install -g pnpm && pnpm install",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "bradlc.vscode-tailwindcss",
+        "ms-playwright.playwright",
+        "storybook.storybook-vscode",
+        "formulahendry.auto-rename-tag",
+        "christian-kohler.path-intellisense"
+      ],
+      "settings": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "explicit"
+        }
+      }
+    }
+  }
+}
