@@ -17,3 +17,6 @@ export { Badge } from './components/Badge';
 export { Sidebar } from './components/Sidebar';
 export { cn } from './lib/utils';
 export { StatusBadge } from './StatusBadge';
+export { AlertBanner } from './components/AlertBanner';
+export { ProgressBar } from './components/ProgressBar';
+export { DataTable } from './components/DataTable';
