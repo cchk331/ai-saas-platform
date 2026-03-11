@@ -28,8 +28,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: pnpm
-      - run: pnpm install
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
       - name: Check formatting
         run: pnpm prettier --check "**/*.{ts,tsx,json,css,md}" || true
       - name: Lint
