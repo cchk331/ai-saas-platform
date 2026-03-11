@@ -1,0 +1,31 @@
+{
+  "name": "ai-saas-platform",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Monorepo for three AI SaaS products. Uses pnpm workspaces to share code, enforce consistent tooling, and run CI across all apps from a single root.",
+  "keywords": ["ai", "saas", "fintech", "analytics", "media-buying"],
+  "scripts": {
+    "dev:finance": "pnpm --filter finance-os dev",
+    "dev:analytics": "pnpm --filter analytics-copilot dev",
+    "dev:media": "pnpm --filter media-buyer dev",
+    "dev:storybook": "pnpm --filter design-system storybook",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm -r typecheck",
+    "test:unit": "pnpm -r test:unit",
+    "test:integration": "pnpm -r test:integration",
+    "test:e2e": "pnpm -r test:e2e",
+    "build": "pnpm -r build"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "eslint": "^9.0.0",
+    "prettier": "^3.3.0",
+    "@playwright/test": "^1.45.0",
+    "vitest": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "packageManager": "pnpm@9.15.0"
+}
