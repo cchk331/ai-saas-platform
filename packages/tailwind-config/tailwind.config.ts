@@ -1,52 +1,31 @@
-// Shared Tailwind CSS Configuration
-// Rationale: Centralizes design tokens (colors, spacing, fonts) so all
-// three products maintain visual consistency across the platform.
-//
-// Steps:
-// 1. Define brand color palette with semantic naming
-// 2. Extend default theme with custom spacing and border radius
-// 3. Configure dark mode via class strategy for user preference
-// 4. Export config for each app's tailwind.config.ts to extend
-
 import type { Config } from "tailwindcss";
 
-const config: Config = {
-  darkMode: "class",
-  content: [
-    "./src/**/*.{ts,tsx}",
-    "../../packages/design-system/src/**/*.{ts,tsx}",
-  ],
+const config: Partial<Config> = {
+  darkMode: ["class"],
   theme: {
     extend: {
       colors: {
-        brand: {
-          50: "#eff6ff",
-          100: "#dbeafe",
-          500: "#3b82f6",
-          600: "#2563eb",
-          700: "#1d4ed8",
-          900: "#1e3a5f",
-        },
-        success: { 500: "#22c55e", 600: "#16a34a" },
-        warning: { 500: "#f59e0b", 600: "#d97706" },
-        danger: { 500: "#ef4444", 600: "#dc2626" },
-        surface: {
-          DEFAULT: "#ffffff",
-          dark: "#0f172a",
-          muted: "#f8fafc",
-        },
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: { DEFAULT: "hsl(var(--primary))", foreground: "hsl(var(--primary-foreground))" },
+        secondary: { DEFAULT: "hsl(var(--secondary))", foreground: "hsl(var(--secondary-foreground))" },
+        destructive: { DEFAULT: "hsl(var(--destructive))", foreground: "hsl(var(--destructive-foreground))" },
+        muted: { DEFAULT: "hsl(var(--muted))", foreground: "hsl(var(--muted-foreground))" },
+        accent: { DEFAULT: "hsl(var(--accent))", foreground: "hsl(var(--accent-foreground))" },
+        popover: { DEFAULT: "hsl(var(--popover))", foreground: "hsl(var(--popover-foreground))" },
+        card: { DEFAULT: "hsl(var(--card))", foreground: "hsl(var(--card-foreground))" },
       },
       borderRadius: {
-        xl: "0.75rem",
-        "2xl": "1rem",
-      },
-      fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"],
-        mono: ["JetBrains Mono", "monospace"],
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animate")],
 };
 
 export default config;

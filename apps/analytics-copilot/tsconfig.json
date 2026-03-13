@@ -1,11 +1,20 @@
 {
   "extends": "../../packages/tsconfig/base.json",
   "compilerOptions": {
-    "plugins": [{ "name": "next" }],
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
     "paths": {
-      "@/*": ["./src/*"],
-      "@repo/design-system/*": ["../../packages/design-system/src/*"]
-    }
+      "@/*": [
+        "./src/*"
+      ],
+      "@repo/design-system/*": [
+        "../../packages/design-system/src/*"
+      ]
+    },
+    "allowJs": true
   },
   "include": [
     "next-env.d.ts",
@@ -13,5 +22,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }
